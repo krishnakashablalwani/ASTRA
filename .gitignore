@@ -1,0 +1,31 @@
+problem-statement.txt
+
+# Node dependencies
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+frontend/dist/
+dist/
+
+# Environment files (do NOT commit secrets)
+.env
+*.env
+*/.env
+app/backend/.env
+frontend/.env
+
+# Uploads and runtime artifacts
+app/backend/uploads/
+
+# IDE/editor
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+to-do.txt

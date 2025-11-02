@@ -1,0 +1,238 @@
+:root,
+[data-theme="light"] {
+  /* Electric Nectar (Front-End) */
+  --nectar-primary: #FFC107;
+  --nectar-secondary: #00CED1;
+  --nectar-bg: #F8F9FA;
+  --nectar-surface: #FFFFFF;
+  --nectar-text: #212529;
+  --nectar-text-secondary: #6C757D;
+  --nectar-border: #DEE2E6;
+
+  /* Data Hive (Back-End) */
+  --hive-bg: #F1F3F5;
+  --hive-surface: #FFFFFF;
+  --hive-text: #212529;
+  --hive-text-secondary: #6C757D;
+  --hive-border: #DEE2E6;
+  --hive-success: #28A745;
+  --hive-error: #DC3545;
+  --hive-warning: #FD7E14;
+  --hive-info: #007BFF;
+}
+
+[data-theme="dark"] {
+  /* Electric Nectar Dark */
+  --nectar-primary: #FFD54F;
+  --nectar-secondary: #26C6DA;
+  --nectar-bg: #121212;
+  --nectar-surface: #1E1E1E;
+  --nectar-text: #FFFFFF;
+  --nectar-text-secondary: #A0A0A0;
+  --nectar-border: #333333;
+
+  /* Data Hive Dark */
+  --hive-bg: #1A1A1A;
+  --hive-surface: #2D2D2D;
+  --hive-text: #ffffff;
+  --hive-text-secondary: #A0A0A0;
+  --hive-border: #404040;
+  --hive-success: #20C997;
+  --hive-error: #FA5252;
+  --hive-warning: #FF922B;
+  --hive-info: #339AF0;
+}
+
+body {
+  background: var(--nectar-bg);
+  color: var(--nectar-text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure text is always readable */
+[data-theme="dark"] .text-muted {
+  color: var(--nectar-text-secondary) !important;
+}
+
+[data-theme="dark"] .text-dark {
+  color: var(--nectar-text) !important;
+}
+
+[data-theme="dark"] .bg-light {
+  background: var(--hive-surface) !important;
+}
+
+[data-theme="dark"] .bg-white {
+  background: var(--hive-surface) !important;
+}
+
+[data-theme="dark"] .border {
+  border-color: var(--hive-border) !important;
+}
+
+/* Override Bootstrap's hardcoded text colors in dark mode */
+[data-theme="dark"] * {
+  color: var(--hive-text);
+}
+
+[data-theme="dark"] .btn {
+  color: #fff;
+}
+
+[data-theme="dark"] .nav-link {
+  color: var(--hive-text) !important;
+}
+
+[data-theme="dark"] textarea,
+[data-theme="dark"] input,
+[data-theme="dark"] select {
+  color: var(--hive-text) !important;
+  background: var(--hive-surface) !important;
+  border-color: var(--hive-border) !important;
+}
+
+/* Fix form-control with mb-2 class in dark mode */
+[data-theme="dark"] .form-control.mb-2,
+[data-theme="dark"] .form-select.mb-2 {
+  background: var(--hive-surface) !important;
+  color: var(--hive-text) !important;
+  border-color: var(--hive-border) !important;
+}
+
+/* Force all inputs and text areas in dark mode */
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] input[type="number"],
+[data-theme="dark"] input[type="date"],
+[data-theme="dark"] input[type="time"],
+[data-theme="dark"] textarea {
+  background: var(--hive-surface) !important;
+  color: var(--hive-text) !important;
+  border-color: var(--hive-border) !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: var(--hive-text-secondary) !important;
+}
+
+/* Force card titles and text to be visible */
+[data-theme="dark"] .card-title,
+[data-theme="dark"] .card-text,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: var(--hive-text) !important;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] label,
+[data-theme="dark"] small {
+  color: var(--hive-text) !important;
+}
+
+[data-theme="dark"] .modal-title,
+[data-theme="dark"] .modal-body,
+[data-theme="dark"] .modal-header,
+[data-theme="dark"] .modal-footer {
+  color: var(--hive-text) !important;
+}
+
+/* Fix card backgrounds and borders */
+[data-theme="dark"] .card {
+  background: var(--hive-surface) !important;
+  border-color: var(--hive-border) !important;
+  color: var(--hive-text) !important;
+}
+
+[data-theme="dark"] .card-body {
+  color: var(--hive-text) !important;
+}
+
+[data-theme="dark"] .list-group-item {
+  background: var(--hive-surface) !important;
+  border-color: var(--hive-border) !important;
+  color: var(--hive-text) !important;
+}
+
+/* Fix alert text in dark mode */
+[data-theme="dark"] .alert {
+  color: var(--hive-text) !important;
+  border-color: var(--hive-border) !important;
+}
+
+[data-theme="dark"] .alert-success {
+  background-color: rgba(32, 201, 151, 0.15) !important;
+  color: #20C997 !important;
+  border-color: #20C997 !important;
+}
+
+[data-theme="dark"] .alert-danger {
+  background-color: rgba(250, 82, 82, 0.15) !important;
+  color: #FA5252 !important;
+  border-color: #FA5252 !important;
+}
+
+[data-theme="dark"] .alert-warning {
+  background-color: rgba(255, 146, 43, 0.15) !important;
+  color: #FF922B !important;
+  border-color: #FF922B !important;
+}
+
+[data-theme="dark"] .alert-info {
+  background-color: rgba(51, 154, 240, 0.15) !important;
+  color: #339AF0 !important;
+  border-color: #339AF0 !important;
+}
+
+/* Fix table styling in dark mode */
+[data-theme="dark"] .table {
+  color: var(--hive-text) !important;
+  border-color: var(--hive-border) !important;
+  --bs-table-bg: transparent;
+  --bs-table-striped-bg: rgba(255, 255, 255, 0.02);
+  --bs-table-active-bg: rgba(255, 255, 255, 0.05);
+  --bs-table-hover-bg: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .table> :not(caption)>*>* {
+  background-color: transparent !important;
+  border-bottom-color: var(--hive-border) !important;
+  color: var(--hive-text) !important;
+}
+
+[data-theme="dark"] .table-bordered> :not(caption)>* {
+  border-color: var(--hive-border) !important;
+}
+
+[data-theme="dark"] .table-bordered> :not(caption)>*>* {
+  border-color: var(--hive-border) !important;
+}
+
+[data-theme="dark"] .table-hover>tbody>tr:hover>* {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: var(--hive-text) !important;
+}
+
+[data-theme="dark"] thead th {
+  color: var(--hive-text) !important;
+  border-color: var(--hive-border) !important;
+}
+
+[data-theme="dark"] tbody td {
+  color: var(--hive-text) !important;
+  border-color: var(--hive-border) !important;
+}
+
+[data-theme="dark"] tbody td strong {
+  color: var(--hive-text) !important;
+}
+
+[data-theme="dark"] tbody td small {
+  color: var(--nectar-text-secondary) !important;
+}

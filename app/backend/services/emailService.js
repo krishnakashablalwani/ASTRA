@@ -1,0 +1,262 @@
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+// Check if email credentials are configured
+const EMAIL_USER = process.env.EMAIL_USER;
+const EMAIL_PASS = process.env.EMAIL_PASS;
+const emailConfigured = EMAIL_USER && EMAIL_PASS;
+
+// Create reusable transporter only if credentials are available
+let transporter = null;
+
+if (emailConfigured) {
+  transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: EMAIL_USER,
+      pass: EMAIL_PASS, // Use App Password for Gmail
+    },
+  });
+
+  // Verify transporter configuration
+  transporter.verify((error, success) => {
+    if (error) {
+      console.error('❌ Email service configuration error:', error.message);
+      console.log('💡 Check that EMAIL_USER and EMAIL_PASS are correct in .env file');
+    } else {
+      console.log('✅ Email service ready');
+    }
+  });
+} else {
+  console.warn('⚠️  Email service not configured. Add EMAIL_USER and EMAIL_PASS to .env file to enable email notifications.');
+}
+
+/**
+ * Send task deadline reminder email
+ */
+export async function sendTaskDeadlineEmail(userEmail, userName, task) {
+  if (!emailConfigured) {
+    console.warn('Email not configured. Skipping task deadline email.');
+    return;
+  }
+  
+  const mailOptions = {
+    from: `"CampusHive" <${EMAIL_USER}>`,
+    to: userEmail,
+    subject: `⏰ Task Deadline Reminder: ${task.title}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: linear-gradient(135deg, #FFD54F 0%, #F59E0B 100%); padding: 20px; border-radius: 10px 10px 0 0;">
+          <h1 style="color: white; margin: 0;">🐝 CampusHive</h1>
+        </div>
+        <div style="padding: 30px; background: #f8f9fa; border-radius: 0 0 10px 10px;">
+          <h2 style="color: #212529;">Hi ${userName},</h2>
+          <p style="color: #6c757d; font-size: 16px;">Your task is due soon!</p>
+          
+          <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #F59E0B;">
+            <h3 style="color: #F59E0B; margin-top: 0;">${task.title}</h3>
+            ${task.description ? `<p style="color: #6c757d;">${task.description}</p>` : ''}
+            <p style="color: #212529; font-weight: bold;">
+              📅 Due: ${new Date(task.dueDate).toLocaleString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+              })}
+            </p>
+            ${task.priority ? `<p style="color: #6c757d;">Priority: <span style="color: #dc3545; font-weight: bold;">${task.priority}</span></p>` : ''}
+          </div>
+          
+          <p style="color: #6c757d;">Log in to CampusHive to manage your tasks.</p>
+          <p style="color: #adb5bd; font-size: 12px; margin-top: 30px;">This is an automated message from CampusHive. Please do not reply to this email.</p>
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log(`Task deadline email sent to ${userEmail}`);
+  } catch (error) {
+    console.error('Error sending task deadline email:', error);
+    throw error;
+  }
+}
+
+/**
+ * Send event registration confirmation email
+ */
+export async function sendEventRegistrationEmail(userEmail, userName, event) {
+  const mailOptions = {
+    from: `"CampusHive" <${process.env.EMAIL_USER}>`,
+    to: userEmail,
+    subject: `✅ Event Registration Confirmed: ${event.title}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: linear-gradient(135deg, #FFD54F 0%, #F59E0B 100%); padding: 20px; border-radius: 10px 10px 0 0;">
+          <h1 style="color: white; margin: 0;">🐝 CampusHive</h1>
+        </div>
+        <div style="padding: 30px; background: #f8f9fa; border-radius: 0 0 10px 10px;">
+          <h2 style="color: #212529;">Hi ${userName},</h2>
+          <p style="color: #28a745; font-size: 18px; font-weight: bold;">You're registered for this event! 🎉</p>
+          
+          <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #28a745;">
+            <h3 style="color: #28a745; margin-top: 0;">${event.title}</h3>
+            ${event.description ? `<p style="color: #6c757d;">${event.description}</p>` : ''}
+            
+            <div style="margin-top: 15px;">
+              <p style="color: #212529; margin: 5px 0;">
+                <strong>📅 Date:</strong> ${new Date(event.date).toLocaleString('en-US', { 
+                  weekday: 'long', 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
+              </p>
+              ${event.location ? `<p style="color: #212529; margin: 5px 0;"><strong>📍 Location:</strong> ${event.location}</p>` : ''}
+              ${event.club?.name ? `<p style="color: #212529; margin: 5px 0;"><strong>🎪 Club:</strong> ${event.club.name}</p>` : ''}
+            </div>
+          </div>
+          
+          <p style="color: #6c757d;">We'll send you a reminder before the event. See you there!</p>
+          <p style="color: #adb5bd; font-size: 12px; margin-top: 30px;">This is an automated message from CampusHive. Please do not reply to this email.</p>
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log(`Event registration email sent to ${userEmail}`);
+  } catch (error) {
+    console.error('Error sending event registration email:', error);
+    throw error;
+  }
+}
+
+/**
+ * Send library book checkout confirmation email
+ */
+export async function sendLibraryCheckoutEmail(userEmail, userName, bookDetails, checkout) {
+  const mailOptions = {
+    from: `"CampusHive Library" <${process.env.EMAIL_USER}>`,
+    to: userEmail,
+    subject: `📚 Book Checked Out: ${bookDetails.title}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: linear-gradient(135deg, #FFD54F 0%, #F59E0B 100%); padding: 20px; border-radius: 10px 10px 0 0;">
+          <h1 style="color: white; margin: 0;">📚 CampusHive Library</h1>
+        </div>
+        <div style="padding: 30px; background: #f8f9fa; border-radius: 0 0 10px 10px;">
+          <h2 style="color: #212529;">Hi ${userName},</h2>
+          <p style="color: #007bff; font-size: 18px; font-weight: bold;">Book successfully checked out! 📖</p>
+          
+          <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #007bff;">
+            <h3 style="color: #007bff; margin-top: 0;">${bookDetails.title}</h3>
+            
+            <div style="margin-top: 15px;">
+              <p style="color: #212529; margin: 5px 0;"><strong>📕 Book Code:</strong> ${bookDetails.bookCode}</p>
+              ${bookDetails.isbn ? `<p style="color: #212529; margin: 5px 0;"><strong>📋 ISBN:</strong> ${bookDetails.isbn}</p>` : ''}
+              <p style="color: #212529; margin: 5px 0;">
+                <strong>📅 Checkout Date:</strong> ${new Date(checkout.checkoutDate).toLocaleDateString('en-US', { 
+                  weekday: 'long', 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric'
+                })}
+              </p>
+              <p style="color: #dc3545; margin: 5px 0; font-weight: bold;">
+                <strong>⏰ Return By:</strong> ${new Date(checkout.returnDeadline).toLocaleDateString('en-US', { 
+                  weekday: 'long', 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric'
+                })}
+              </p>
+            </div>
+          </div>
+          
+          <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
+            <p style="color: #856404; margin: 0;">
+              <strong>⚠️ Important:</strong> Please return the book by the due date to avoid late fees. We'll send you a reminder 24 hours before the deadline.
+            </p>
+          </div>
+          
+          <p style="color: #adb5bd; font-size: 12px; margin-top: 30px;">This is an automated message from CampusHive Library. Please do not reply to this email.</p>
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log(`Library checkout email sent to ${userEmail}`);
+  } catch (error) {
+    console.error('Error sending library checkout email:', error);
+    throw error;
+  }
+}
+
+/**
+ * Send task creation confirmation email
+ */
+export async function sendTaskCreatedEmail(userEmail, userName, task) {
+  const mailOptions = {
+    from: `"CampusHive" <${process.env.EMAIL_USER}>`,
+    to: userEmail,
+    subject: `✅ Task Created: ${task.title}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: linear-gradient(135deg, #FFD54F 0%, #F59E0B 100%); padding: 20px; border-radius: 10px 10px 0 0;">
+          <h1 style="color: white; margin: 0;">🐝 CampusHive</h1>
+        </div>
+        <div style="padding: 30px; background: #f8f9fa; border-radius: 0 0 10px 10px;">
+          <h2 style="color: #212529;">Hi ${userName},</h2>
+          <p style="color: #28a745; font-size: 16px;">Your task has been created successfully! ✨</p>
+          
+          <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #28a745;">
+            <h3 style="color: #28a745; margin-top: 0;">${task.title}</h3>
+            ${task.description ? `<p style="color: #6c757d;">${task.description}</p>` : ''}
+            ${task.dueDate ? `
+              <p style="color: #212529; font-weight: bold;">
+                📅 Due: ${new Date(task.dueDate).toLocaleString('en-US', { 
+                  weekday: 'long', 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
+              </p>
+            ` : ''}
+            ${task.priority ? `<p style="color: #6c757d;">Priority: <span style="font-weight: bold;">${task.priority}</span></p>` : ''}
+          </div>
+          
+          <p style="color: #6c757d;">We'll remind you 24 hours before the deadline. Stay productive!</p>
+          <p style="color: #adb5bd; font-size: 12px; margin-top: 30px;">This is an automated message from CampusHive. Please do not reply to this email.</p>
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log(`Task created email sent to ${userEmail}`);
+  } catch (error) {
+    console.error('Error sending task created email:', error);
+    // Don't throw, task creation should succeed even if email fails
+  }
+}
+
+export default {
+  sendTaskDeadlineEmail,
+  sendEventRegistrationEmail,
+  sendLibraryCheckoutEmail,
+  sendTaskCreatedEmail,
+};

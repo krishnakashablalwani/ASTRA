@@ -1,0 +1,15 @@
+{
+  "name": "CampusHive",
+  "short_name": "CampusHive",
+  "description": "CampusHive — Buzzing with campus activity.",
+  "theme_color": "#FFC107",
+  "background_color": "#121212",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+      { "src": "/dark.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+      { "src": "/light.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

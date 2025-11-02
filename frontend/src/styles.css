@@ -1,0 +1,266 @@
+@import url('./palette.css');
+
+.sidebar .nav-link {
+	color: var(--hive-text);
+	transition: all 0.2s ease;
+	border-radius: 8px;
+}
+
+.sidebar .nav-link:hover {
+	background: var(--nectar-primary);
+	color: #fff;
+}
+
+.sidebar .nav-link.active {
+	background: var(--nectar-primary);
+	color: #fff;
+	font-weight: 600;
+}
+
+.card {
+	background: var(--hive-surface);
+	color: var(--hive-text);
+	border-color: var(--hive-border);
+}
+
+.alert-light {
+	background: var(--hive-bg);
+	color: var(--hive-text);
+	border-color: var(--hive-border);
+}
+
+.form-control,
+.form-select {
+	background: var(--hive-surface);
+	color: var(--hive-text);
+	border-color: var(--hive-border);
+}
+
+.form-control:focus,
+.form-select:focus {
+	background: var(--hive-surface);
+	color: var(--hive-text);
+	border-color: var(--nectar-primary);
+}
+
+.modal-content {
+	background: var(--hive-surface);
+	color: var(--hive-text);
+}
+
+.modal-header {
+	border-bottom-color: var(--hive-border);
+}
+
+.modal-footer {
+	border-top-color: var(--hive-border);
+}
+
+.table {
+	color: var(--hive-text);
+}
+
+.table-hover tbody tr:hover {
+	background: var(--hive-bg);
+}
+
+.progress {
+	background: var(--hive-bg);
+}
+
+.list-group-item {
+	background: var(--hive-surface);
+	color: var(--hive-text);
+	border-color: var(--hive-border);
+}
+
+.badge {
+	color: #fff;
+}
+
+.navbar-brand {
+	color: var(--nectar-primary) !important;
+}
+
+.navbar .nav-link {
+	color: var(--hive-text) !important;
+}
+
+.navbar .nav-link:hover {
+	color: var(--nectar-primary) !important;
+}
+
+.navbar .nav-link.active {
+	color: var(--nectar-primary) !important;
+	font-weight: 600;
+}
+
+p,
+.card-text,
+.card-title,
+.modal-title,
+label,
+small,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--hive-text);
+}
+
+::placeholder {
+	color: var(--hive-text-secondary);
+}
+
+header {
+	background: var(--nectar-surface);
+	border-bottom: 2px solid var(--nectar-border);
+	padding: 1.5rem 1rem 1rem 1rem;
+	color: var(--nectar-text);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+header h1 {
+	margin: 0;
+	color: var(--nectar-primary);
+	letter-spacing: 1px;
+	font-weight: 700;
+	font-size: 2rem;
+}
+
+nav a {
+	margin-right: 1.5rem;
+	color: var(--nectar-secondary);
+	text-decoration: none;
+	font-weight: 500;
+	transition: color 0.2s;
+}
+
+nav a:hover,
+nav a.active {
+	color: var(--nectar-primary);
+}
+
+main {
+	padding: 2rem 1rem;
+}
+
+.auth {
+	max-width: 400px;
+	margin: 2rem auto;
+	background: var(--nectar-surface);
+	border: 1px solid var(--nectar-border);
+	border-radius: 12px;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+	padding: 2rem 2rem 1.5rem 2rem;
+}
+
+.auth h2 {
+	color: var(--nectar-primary);
+	margin-bottom: 1rem;
+}
+
+.auth form {
+	display: flex;
+	flex-direction: column;
+}
+
+.auth label {
+	color: var(--nectar-text-secondary);
+	margin-bottom: 0.2rem;
+	font-size: 1rem;
+}
+
+.auth input {
+	padding: 0.7rem;
+	margin-bottom: 1rem;
+	border: 1px solid var(--nectar-border);
+	border-radius: 6px;
+	font-size: 1rem;
+}
+
+.auth button {
+	background: var(--nectar-primary);
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 0.7rem;
+	font-size: 1.1rem;
+	font-weight: 600;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(255, 193, 7, 0.08);
+	transition: background 0.2s;
+}
+
+.auth button:hover {
+	background: var(--nectar-secondary);
+}
+
+.error {
+	color: var(--hive-error);
+	margin-top: 0.5rem;
+}
+
+.dashboard {
+	background: var(--hive-bg);
+	color: var(--hive-text);
+	border-radius: 12px;
+	padding: 2rem;
+	max-width: 700px;
+	margin: 2rem auto;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.dashboard h2 {
+	color: var(--hive-info);
+	margin-bottom: 1.5rem;
+}
+
+.dashboard section {
+	background: var(--hive-surface);
+	border: 1px solid var(--hive-border);
+	border-radius: 8px;
+	padding: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.dashboard h3 {
+	color: var(--hive-text);
+	margin-bottom: 1rem;
+}
+
+.dashboard ul {
+	list-style: none;
+	padding: 0;
+}
+
+.dashboard li {
+	padding: 0.5rem 0;
+	border-bottom: 1px solid var(--hive-border);
+}
+
+.dashboard li:last-child {
+	border-bottom: none;
+}
+
+.honey-hero {
+	position: relative;
+	border-radius: 1.5rem;
+	background: #ffb703;
+	background-image: url('/honey-lowpoly.svg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+
+body.dark .honey-hero {
+	background: #7a3f05;
+	background-image: url('/honey-lowpoly-dark.svg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
