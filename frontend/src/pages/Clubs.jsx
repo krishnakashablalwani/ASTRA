@@ -150,7 +150,6 @@ export default function Clubs() {
                               Created by: {creatorName}
                               {typeof c.memberCount === 'number' && (
                                 <span className="ms-2">
-                                  <i className="bi bi-people-fill me-1"></i>
                                   {c.memberCount} {c.memberCount === 1 ? 'member' : 'members'}
                                 </span>
                               )}

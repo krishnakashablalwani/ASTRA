@@ -50,7 +50,6 @@ export default function AIChat() {
         <h5 className="card-title text-primary">AI Campus Chat</h5>
         {rateLimited && (
           <div className="alert alert-warning alert-dismissible fade show mb-3" role="alert">
-            <i className="bi bi-exclamation-triangle-fill me-2"></i>
             <strong>Rate limit reached!</strong> Please wait a moment before sending more messages.
             <button type="button" className="btn-close" onClick={() => setRateLimited(false)} aria-label="Close"></button>
           </div>

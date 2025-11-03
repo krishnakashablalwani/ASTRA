@@ -43,13 +43,27 @@ export default function EventChatbot() {
     try {
       // Create context from events
       const eventsContext = events.map(e => 
-        `Event: ${e.title}\nDate: ${new Date(e.date).toLocaleDateString()}\nTime: ${e.time || 'TBD'}\nLocation: ${e.location}\nDescription: ${e.description}`
+        `Event: ${e.title}\nDate: ${new Date(e.date).toLocaleDateString()}\nTime: ${e.time || 'TBD'}\nLocation: ${e.location || 'TBD'}\nDescription: ${e.description || 'No description'}`
       ).join('\n\n');
 
-      const prompt = `You are a helpful campus event assistant. Here are the current events:\n\n${eventsContext}\n\nUser question: ${input}\n\nProvide a helpful, concise answer. If the user asks about location, mention they can view it on Google Maps.`;
+      const systemMessage = {
+        role: 'system',
+        content: 'You are a helpful campus event assistant. Answer questions about events including timings, locations, and details. Be concise and friendly.'
+      };
 
-      const response = await api.post('/ai/chat', { message: prompt });
-      const aiResponse = response.data.response || response.data.message;
+      const contextMessage = {
+        role: 'user',
+        content: `Here are the current campus events:\n\n${eventsContext}\n\nNow answer this question: ${input}`
+      };
+
+      const response = await api.post('/ai/chat', { 
+        messages: [systemMessage, contextMessage]
+      });
+      
+      const aiResponse = response.data?.choices?.[0]?.message?.content || 
+                        response.data?.response || 
+                        response.data?.message ||
+                        'I could not generate a response.';
 
       // Check if response mentions a location and add map link
       const locationMatch = events.find(e => 
@@ -84,8 +98,7 @@ export default function EventChatbot() {
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h2 className="mb-1">
-            <i className="bi bi-robot me-2"></i>
-            Event Chatbot
+            🤖 Event Chatbot
           </h2>
           <p className="text-muted mb-0">Ask me about event timings, locations, and more!</p>
         </div>
@@ -113,7 +126,6 @@ export default function EventChatbot() {
                     }}
                   >
                     <div className="d-flex align-items-start gap-2 mb-1">
-                      <i className={`bi bi-${msg.role === 'user' ? 'person-circle' : 'robot'} fs-5`}></i>
                       <strong>{msg.role === 'user' ? 'You' : 'Event Bot'}</strong>
                     </div>
                     <p className="mb-0" style={{ whiteSpace: 'pre-wrap' }}>
@@ -125,8 +137,7 @@ export default function EventChatbot() {
                         onClick={() => openGoogleMaps(msg.mapLocation)}
                         style={{ borderRadius: 8 }}
                       >
-                        <i className="bi bi-geo-alt-fill me-1"></i>
-                        Open in Google Maps
+                        📍 Open in Google Maps
                       </button>
                     )}
                   </div>
@@ -162,7 +173,6 @@ export default function EventChatbot() {
                   disabled={loading || !input.trim()}
                   style={{ borderRadius: '0 12px 12px 0' }}
                 >
-                  <i className="bi bi-send-fill"></i>
                 </button>
               </div>
               <small className="text-muted mt-2 d-block">

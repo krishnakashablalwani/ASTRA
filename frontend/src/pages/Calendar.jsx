@@ -94,7 +94,6 @@ export default function Calendar() {
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h2 className="mb-1">
-            <i className="bi bi-calendar3 me-2"></i>
             Academic Calendar
           </h2>
           <p className="mb-0" style={{color: 'var(--nectar-text-secondary)'}}>Events, exams, and important dates</p>
@@ -111,17 +110,16 @@ export default function Calendar() {
         <div className="card-body">
           <div className="d-flex justify-content-between align-items-center">
             <button className="btn btn-outline-warning" onClick={prevMonth}>
-              <i className="bi bi-chevron-left"></i> Previous
+              Previous
             </button>
             <h4 className="mb-0">{monthName}</h4>
             <button className="btn btn-outline-warning" onClick={nextMonth}>
-              Next <i className="bi bi-chevron-right"></i>
+              Next
             </button>
           </div>
           <div className="d-flex justify-content-end mt-3">
             {hasToken ? (
               <button className="btn btn-warning" onClick={() => setShowAdd(true)}>
-                <i className="bi bi-plus-lg me-1"></i>
                 Add Event
               </button>
             ) : (
@@ -194,7 +192,6 @@ export default function Calendar() {
           <div className="card shadow-sm border-0" style={{ borderRadius: 16 }}>
             <div className="card-body">
               <h5 className="mb-3">
-                <i className="bi bi-calendar-event text-primary me-2"></i>
                 Upcoming Events
               </h5>
               {events.length === 0 ? (
@@ -207,11 +204,9 @@ export default function Calendar() {
                         <div className="flex-grow-1">
                           <h6 className="mb-1">{event.title}</h6>
                           <small style={{color: 'var(--nectar-text-secondary)'}}>
-                            <i className="bi bi-calendar me-1"></i>
                             {new Date(event.date).toLocaleDateString()}
                             {event.time && (
                               <span className="ms-2">
-                                <i className="bi bi-clock me-1"></i>
                                 {event.time}
                               </span>
                             )}
@@ -222,7 +217,6 @@ export default function Calendar() {
                           onClick={() => addToGoogleCalendar(event, 'event')}
                           title="Add to Google Calendar"
                         >
-                          <i className="bi bi-google"></i>
                           <span>Add to Calendar</span>
                         </button>
                       </div>
@@ -238,7 +232,6 @@ export default function Calendar() {
           <div className="card shadow-sm border-0" style={{ borderRadius: 16 }}>
             <div className="card-body">
               <h5 className="mb-3">
-                <i className="bi bi-pencil-square text-danger me-2"></i>
                 Upcoming Exams
               </h5>
               {exams.length === 0 ? (
@@ -251,11 +244,9 @@ export default function Calendar() {
                         <div className="flex-grow-1">
                           <h6 className="mb-1">{exam.title}</h6>
                           <small style={{color: 'var(--nectar-text-secondary)'}}>
-                            <i className="bi bi-calendar me-1"></i>
                             {new Date(exam.date).toLocaleDateString()}
                             {exam.time && (
                               <span className="ms-2">
-                                <i className="bi bi-clock me-1"></i>
                                 {exam.time}
                               </span>
                             )}
@@ -266,7 +257,6 @@ export default function Calendar() {
                           onClick={() => addToGoogleCalendar(exam, 'exam')}
                           title="Add to Google Calendar"
                         >
-                          <i className="bi bi-google"></i>
                           <span>Add to Calendar</span>
                         </button>
                       </div>

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useTheme } from '../contexts/ThemeContext';
-import api from '../services/api';
+import React, { useEffect, useState } from "react";
+import { useTheme } from "../contexts/ThemeContext";
+import api from "../services/api";
 
 export default function AdminDashboard() {
   const { theme } = useTheme();
@@ -12,7 +12,7 @@ export default function AdminDashboard() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState("overview");
 
   useEffect(() => {
     loadAllData();
@@ -22,12 +22,12 @@ export default function AdminDashboard() {
     setLoading(true);
     try {
       const [usersRes, eventsRes, snapsRes, clubsRes] = await Promise.all([
-        api.get('/admin/users'),
-        api.get('/events'),
-        api.get('/studysnap'),
-        api.get('/club')
+        api.get("/admin/users"),
+        api.get("/events"),
+        api.get("/studysnap"),
+        api.get("/club"),
       ]);
-      
+
       setUsers(usersRes.data);
       setEvents(eventsRes.data);
       setSnaps(snapsRes.data);
@@ -40,45 +40,92 @@ export default function AdminDashboard() {
   };
 
   const getUserActivity = (userId) => {
-    const userEvents = events.filter(e => e.attendees?.includes(userId));
-    const userSnaps = snaps.filter(s => s.user?._id === userId || s.user === userId);
-    const userClubs = clubs.filter(c => c.members?.includes(userId));
-    
+    const userEvents = events.filter((e) => e.attendees?.includes(userId));
+    const userSnaps = snaps.filter(
+      (s) => s.user?._id === userId || s.user === userId
+    );
+    const userClubs = clubs.filter((c) => c.members?.includes(userId));
+
     return {
       events: userEvents,
       snaps: userSnaps,
-      clubs: userClubs
+      clubs: userClubs,
     };
   };
 
   const getRoleColor = (role) => {
-    switch(role) {
-      case 'admin': return 'danger';
-      case 'teacher': return 'primary';
-      case 'staff': return 'info';
-      case 'club': return 'warning';
-      default: return 'secondary';
+    switch (role) {
+      case "admin":
+        return "danger";
+      case "teacher":
+        return "primary";
+      case "staff":
+        return "info";
+      case "club":
+        return "warning";
+      default:
+        return "secondary";
     }
   };
 
   const getRoleIcon = (role) => {
-    switch(role) {
-      case 'admin': return 'bi-shield-check';
-      case 'teacher': return 'bi-mortarboard';
-      case 'staff': return 'bi-person-badge';
-      case 'club': return 'bi-people';
-      default: return 'bi-person';
+    switch (role) {
+      case "admin":
+        return "bi-shield-check";
+      case "teacher":
+        return "bi-mortarboard";
+      case "staff":
+        return "bi-person-badge";
+      case "club":
+        return "bi-people";
+      default:
+        return "bi-person";
     }
   };
 
   const stats = [
-    { label: 'Total Users', value: users.length, icon: 'bi-people', color: 'primary' },
-    { label: 'Students', value: users.filter(u => u.role === 'student').length, icon: 'bi-person', color: 'success' },
-    { label: 'Teachers', value: users.filter(u => u.role === 'teacher').length, icon: 'bi-mortarboard', color: 'info' },
-    { label: 'Staff', value: users.filter(u => u.role === 'staff').length, icon: 'bi-person-badge', color: 'warning' },
-    { label: 'Total Events', value: events.length, icon: 'bi-calendar-event', color: 'danger' },
-    { label: 'Study Snaps', value: snaps.length, icon: 'bi-camera', color: 'purple' },
-    { label: 'Active Clubs', value: clubs.length, icon: 'bi-people', color: 'success' },
+    {
+      label: "Total Users",
+      value: users.length,
+      icon: "bi-people",
+      color: "primary",
+    },
+    {
+      label: "Students",
+      value: users.filter((u) => u.role === "student").length,
+      icon: "bi-person",
+      color: "success",
+    },
+    {
+      label: "Teachers",
+      value: users.filter((u) => u.role === "teacher").length,
+      icon: "bi-mortarboard",
+      color: "info",
+    },
+    {
+      label: "Staff",
+      value: users.filter((u) => u.role === "staff").length,
+      icon: "bi-person-badge",
+      color: "warning",
+    },
+    {
+      label: "Total Events",
+      value: events.length,
+      icon: "bi-calendar-event",
+      color: "danger",
+    },
+    {
+      label: "Study Snaps",
+      value: snaps.length,
+      icon: "bi-camera",
+      color: "purple",
+    },
+    {
+      label: "Active Clubs",
+      value: clubs.length,
+      icon: "bi-people",
+      color: "success",
+    },
   ];
 
   if (loading) {
@@ -97,15 +144,14 @@ export default function AdminDashboard() {
     <div className="container-fluid py-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
-          <h2 className="mb-1">
-            <i className="bi bi-shield-check text-danger me-2"></i>
-            Admin Dashboard
-          </h2>
-          <p className="text-muted mb-0">Comprehensive overview of CampusHive activities</p>
+          <h2 className="mb-1">Admin Dashboard</h2>
+          <p className="text-muted mb-0">
+            Comprehensive overview of CampusHive activities
+          </p>
         </div>
-        <img 
-          src={theme === 'light' ? '/light.png' : '/dark.png'} 
-          alt="CampusHive Logo" 
+        <img
+          src={theme === "light" ? "/light.png" : "/dark.png"}
+          alt="CampusHive Logo"
           style={{ height: 50 }}
         />
       </div>
@@ -123,9 +169,9 @@ export default function AdminDashboard() {
                     <p className="text-muted mb-1 small">{stat.label}</p>
                     <h3 className={`mb-0 text-${stat.color}`}>{stat.value}</h3>
                   </div>
-                  <div className={`bg-${stat.color} bg-opacity-10 p-3 rounded`}>
-                    <i className={`bi ${stat.icon} fs-3 text-${stat.color}`}></i>
-                  </div>
+                  <div
+                    className={`bg-${stat.color} bg-opacity-10 p-3 rounded`}
+                  ></div>
                 </div>
               </div>
             </div>
@@ -136,49 +182,52 @@ export default function AdminDashboard() {
       {/* Tabs */}
       <ul className="nav nav-tabs mb-4">
         <li className="nav-item">
-          <button 
-            className={`nav-link ${activeTab === 'overview' ? 'active' : ''}`}
-            onClick={() => setActiveTab('overview')}
+          <button
+            className={`nav-link ${activeTab === "overview" ? "active" : ""}`}
+            onClick={() => setActiveTab("overview")}
           >
-            <i className="bi bi-grid me-2"></i>Overview
+            Overview
           </button>
         </li>
         <li className="nav-item">
-          <button 
-            className={`nav-link ${activeTab === 'users' ? 'active' : ''}`}
-            onClick={() => setActiveTab('users')}
+          <button
+            className={`nav-link ${activeTab === "users" ? "active" : ""}`}
+            onClick={() => setActiveTab("users")}
           >
-            <i className="bi bi-people me-2"></i>All Users
+            All Users
           </button>
         </li>
         <li className="nav-item">
-          <button 
-            className={`nav-link ${activeTab === 'activity' ? 'active' : ''}`}
-            onClick={() => setActiveTab('activity')}
+          <button
+            className={`nav-link ${activeTab === "activity" ? "active" : ""}`}
+            onClick={() => setActiveTab("activity")}
           >
-            <i className="bi bi-activity me-2"></i>User Activity
+            User Activity
           </button>
         </li>
       </ul>
 
       {/* Overview Tab */}
-      {activeTab === 'overview' && (
+      {activeTab === "overview" && (
         <div className="row g-4">
           {/* Recent Events */}
           <div className="col-md-6">
             <div className="card shadow-sm border-0">
               <div className="card-header bg-transparent">
                 <h5 className="mb-0">
-                  <i className="bi bi-calendar-event text-primary me-2"></i>
                   Recent Events
                 </h5>
               </div>
-              <div className="card-body" style={{maxHeight: 400, overflowY: 'auto'}}>
-                {events.slice(0, 10).map(event => (
+              <div
+                className="card-body"
+                style={{ maxHeight: 400, overflowY: "auto" }}
+              >
+                {events.slice(0, 10).map((event) => (
                   <div key={event._id} className="border-bottom pb-2 mb-2">
                     <div className="fw-bold">{event.title}</div>
                     <small className="text-muted">
-                      {new Date(event.date).toLocaleDateString()} • {event.attendees?.length || 0} attendees
+                      {new Date(event.date).toLocaleDateString()} •{" "}
+                      {event.attendees?.length || 0} attendees
                     </small>
                   </div>
                 ))}
@@ -191,16 +240,19 @@ export default function AdminDashboard() {
             <div className="card shadow-sm border-0">
               <div className="card-header bg-transparent">
                 <h5 className="mb-0">
-                  <i className="bi bi-camera text-warning me-2"></i>
                   Recent Study Snaps
                 </h5>
               </div>
-              <div className="card-body" style={{maxHeight: 400, overflowY: 'auto'}}>
-                {snaps.slice(0, 10).map(snap => (
+              <div
+                className="card-body"
+                style={{ maxHeight: 400, overflowY: "auto" }}
+              >
+                {snaps.slice(0, 10).map((snap) => (
                   <div key={snap._id} className="border-bottom pb-2 mb-2">
                     <div className="fw-bold">{snap.caption}</div>
                     <small className="text-muted">
-                      by {snap.user?.name || 'Unknown'} • {snap.likes?.length || 0} likes
+                      by {snap.user?.name || "Unknown"} •{" "}
+                      {snap.likes?.length || 0} likes
                     </small>
                   </div>
                 ))}
@@ -211,7 +263,7 @@ export default function AdminDashboard() {
       )}
 
       {/* Users Tab */}
-      {activeTab === 'users' && (
+      {activeTab === "users" && (
         <div className="card shadow-sm border-0">
           <div className="card-body">
             <div className="table-responsive">
@@ -228,10 +280,9 @@ export default function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map(user => (
+                  {users.map((user) => (
                     <tr key={user._id}>
                       <td>
-                        <i className={`bi ${getRoleIcon(user.role)} me-2`}></i>
                         {user.name}
                       </td>
                       <td>{user.email}</td>
@@ -240,19 +291,19 @@ export default function AdminDashboard() {
                           {user.role}
                         </span>
                       </td>
-                      <td>{user.department || 'N/A'}</td>
+                      <td>{user.department || "N/A"}</td>
                       <td className="small text-muted">
-                        {user.rollNo || user.teacherId || user.staffId || 'N/A'}
+                        {user.rollNo || user.teacherId || user.staffId || "N/A"}
                       </td>
                       <td className="small text-muted">
                         {new Date(user.createdAt).toLocaleDateString()}
                       </td>
                       <td>
-                        <button 
+                        <button
                           className="btn btn-sm btn-outline-primary"
                           onClick={() => {
                             setSelectedUser(user);
-                            setActiveTab('activity');
+                            setActiveTab("activity");
                           }}
                         >
                           View Activity
@@ -268,18 +319,20 @@ export default function AdminDashboard() {
       )}
 
       {/* User Activity Tab */}
-      {activeTab === 'activity' && (
+      {activeTab === "activity" && (
         <div>
           {/* User Selector */}
           <div className="mb-4">
             <label className="form-label fw-bold">Select User</label>
-            <select 
-              className="form-select" 
-              value={selectedUser?._id || ''}
-              onChange={(e) => setSelectedUser(users.find(u => u._id === e.target.value))}
+            <select
+              className="form-select"
+              value={selectedUser?._id || ""}
+              onChange={(e) =>
+                setSelectedUser(users.find((u) => u._id === e.target.value))
+              }
             >
               <option value="">-- Select a user --</option>
-              {users.map(user => (
+              {users.map((user) => (
                 <option key={user._id} value={user._id}>
                   {user.name} ({user.email}) - {user.role}
                 </option>
@@ -295,15 +348,21 @@ export default function AdminDashboard() {
                   <div className="row">
                     <div className="col-md-6">
                       <h4>
-                        <i className={`bi ${getRoleIcon(selectedUser.role)} me-2`}></i>
+                        
                         {selectedUser.name}
                       </h4>
                       <p className="text-muted mb-2">{selectedUser.email}</p>
-                      <span className={`badge bg-${getRoleColor(selectedUser.role)} me-2`}>
+                      <span
+                        className={`badge bg-${getRoleColor(
+                          selectedUser.role
+                        )} me-2`}
+                      >
                         {selectedUser.role}
                       </span>
                       {selectedUser.department && (
-                        <span className="badge bg-secondary">{selectedUser.department}</span>
+                        <span className="badge bg-secondary">
+                          {selectedUser.department}
+                        </span>
                       )}
                     </div>
                     <div className="col-md-6">
@@ -317,19 +376,25 @@ export default function AdminDashboard() {
                         {selectedUser.teacherId && (
                           <div className="col-6 mb-2">
                             <small className="text-muted">Teacher ID</small>
-                            <div className="fw-bold">{selectedUser.teacherId}</div>
+                            <div className="fw-bold">
+                              {selectedUser.teacherId}
+                            </div>
                           </div>
                         )}
                         {selectedUser.staffId && (
                           <div className="col-6 mb-2">
                             <small className="text-muted">Staff ID</small>
-                            <div className="fw-bold">{selectedUser.staffId}</div>
+                            <div className="fw-bold">
+                              {selectedUser.staffId}
+                            </div>
                           </div>
                         )}
                         <div className="col-6 mb-2">
                           <small className="text-muted">Joined</small>
                           <div className="fw-bold">
-                            {new Date(selectedUser.createdAt).toLocaleDateString()}
+                            {new Date(
+                              selectedUser.createdAt
+                            ).toLocaleDateString()}
                           </div>
                         </div>
                       </div>
@@ -345,22 +410,27 @@ export default function AdminDashboard() {
                   <div className="card shadow-sm border-0 h-100">
                     <div className="card-header bg-transparent">
                       <h6 className="mb-0">
-                        <i className="bi bi-calendar-event text-primary me-2"></i>
-                        Events ({getUserActivity(selectedUser._id).events.length})
+                        Events (
+                        {getUserActivity(selectedUser._id).events.length})
                       </h6>
                     </div>
-                    <div className="card-body" style={{maxHeight: 300, overflowY: 'auto'}}>
-                      {getUserActivity(selectedUser._id).events.map(event => (
-                        <div key={event._id} className="border-bottom pb-2 mb-2">
+                    <div
+                      className="card-body"
+                      style={{ maxHeight: 300, overflowY: "auto" }}
+                    >
+                      {getUserActivity(selectedUser._id).events.map((event) => (
+                        <div
+                          key={event._id}
+                          className="border-bottom pb-2 mb-2"
+                        >
                           <div className="small fw-bold">{event.title}</div>
                           <small className="text-muted">
                             {new Date(event.date).toLocaleDateString()}
                           </small>
                         </div>
                       ))}
-                      {getUserActivity(selectedUser._id).events.length === 0 && (
-                        <p className="text-muted small">No events yet</p>
-                      )}
+                      {getUserActivity(selectedUser._id).events.length ===
+                        0 && <p className="text-muted small">No events yet</p>}
                     </div>
                   </div>
                 </div>
@@ -370,12 +440,15 @@ export default function AdminDashboard() {
                   <div className="card shadow-sm border-0 h-100">
                     <div className="card-header bg-transparent">
                       <h6 className="mb-0">
-                        <i className="bi bi-camera text-warning me-2"></i>
-                        Study Snaps ({getUserActivity(selectedUser._id).snaps.length})
+                        Study Snaps (
+                        {getUserActivity(selectedUser._id).snaps.length})
                       </h6>
                     </div>
-                    <div className="card-body" style={{maxHeight: 300, overflowY: 'auto'}}>
-                      {getUserActivity(selectedUser._id).snaps.map(snap => (
+                    <div
+                      className="card-body"
+                      style={{ maxHeight: 300, overflowY: "auto" }}
+                    >
+                      {getUserActivity(selectedUser._id).snaps.map((snap) => (
                         <div key={snap._id} className="border-bottom pb-2 mb-2">
                           <div className="small fw-bold">{snap.caption}</div>
                           <small className="text-muted">
@@ -395,12 +468,14 @@ export default function AdminDashboard() {
                   <div className="card shadow-sm border-0 h-100">
                     <div className="card-header bg-transparent">
                       <h6 className="mb-0">
-                        <i className="bi bi-people text-success me-2"></i>
                         Clubs ({getUserActivity(selectedUser._id).clubs.length})
                       </h6>
                     </div>
-                    <div className="card-body" style={{maxHeight: 300, overflowY: 'auto'}}>
-                      {getUserActivity(selectedUser._id).clubs.map(club => (
+                    <div
+                      className="card-body"
+                      style={{ maxHeight: 300, overflowY: "auto" }}
+                    >
+                      {getUserActivity(selectedUser._id).clubs.map((club) => (
                         <div key={club._id} className="border-bottom pb-2 mb-2">
                           <div className="small fw-bold">{club.name}</div>
                           <small className="text-muted">

@@ -74,7 +74,6 @@ export default function SubjectProficiency() {
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h2 className="mb-1">
-            <i className="bi bi-mortarboard me-2"></i>
             Subject Proficiency
           </h2>
           <p className="text-muted mb-0">Find study partners or share your expertise</p>
@@ -93,7 +92,6 @@ export default function SubjectProficiency() {
           onClick={() => setShowAddModal(true)}
           style={{ borderRadius: 12 }}
         >
-          <i className="bi bi-plus-circle me-2"></i>
           Add Your Proficiency
         </button>
       </div>
@@ -102,7 +100,6 @@ export default function SubjectProficiency() {
       {myProficiencies.length > 0 && (
         <div className="mb-5">
           <h4 className="mb-3">
-            <i className="bi bi-star-fill text-warning me-2"></i>
             My Proficiencies
           </h4>
           <div className="row">
@@ -124,7 +121,6 @@ export default function SubjectProficiency() {
 
       {/* Find Study Partners */}
       <h4 className="mb-3">
-        <i className="bi bi-people-fill text-primary me-2"></i>
         Find Study Partners
       </h4>
       <div className="row">
@@ -132,7 +128,6 @@ export default function SubjectProficiency() {
           <div className="col-12">
             <div className="card shadow border-0" style={{ borderRadius: 16 }}>
               <div className="card-body text-center py-5">
-                <i className="bi bi-search display-1 text-muted mb-3"></i>
                 <h4 className="text-muted">No proficiencies found</h4>
                 <p className="text-muted">Be the first to add your subject expertise!</p>
               </div>
@@ -152,11 +147,9 @@ export default function SubjectProficiency() {
                     </div>
                   </div>
                   <p className="card-text mb-3">
-                    <i className="bi bi-person-circle me-2"></i>
                     {prof.studentName || 'Anonymous Student'}
                   </p>
                   <p className="card-text text-muted small">
-                    <i className="bi bi-building me-2"></i>
                     {prof.department || 'General'}
                   </p>
                   <button 
@@ -164,7 +157,6 @@ export default function SubjectProficiency() {
                     onClick={() => handleConnect(prof._id)}
                     style={{ borderRadius: 8 }}
                   >
-                    <i className="bi bi-chat-dots me-2"></i>
                     Connect
                   </button>
                 </div>
@@ -215,7 +207,6 @@ export default function SubjectProficiency() {
                     Cancel
                   </button>
                   <button type="submit" className="btn btn-warning">
-                    <i className="bi bi-plus-circle me-2"></i>
                     Add Proficiency
                   </button>
                 </div>

@@ -87,7 +87,6 @@ export default function Feedback() {
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h2 className="mb-1">
-            <i className="bi bi-chat-square-text me-2"></i>
             Feedback & Ratings
           </h2>
           <p className="text-muted mb-0">Share your experience and suggestions</p>
@@ -106,7 +105,6 @@ export default function Feedback() {
           onClick={() => setShowFeedbackModal(true)}
           style={{ borderRadius: 12 }}
         >
-          <i className="bi bi-plus-circle me-2"></i>
           Submit Feedback
         </button>
       </div>
@@ -134,7 +132,6 @@ export default function Feedback() {
                   <div key={rating} className="mb-2">
                     <div className="d-flex align-items-center gap-2">
                       <span style={{ width: 20 }}>{rating}</span>
-                      <i className="bi bi-star-fill text-warning"></i>
                       <div className="progress flex-grow-1" style={{ height: 10 }}>
                         <div 
                           className="progress-bar bg-warning" 
@@ -153,7 +150,6 @@ export default function Feedback() {
 
   {/* Feedback List */}
       <h4 className="mb-3">
-        <i className="bi bi-list-ul me-2"></i>
         Recent Feedback
       </h4>
       <div className="row">
@@ -161,7 +157,6 @@ export default function Feedback() {
           <div className="col-12">
             <div className="card shadow border-0" style={{ borderRadius: 16 }}>
               <div className="card-body text-center py-5">
-                <i className="bi bi-chat-dots display-1 text-muted mb-3"></i>
                 <h4 className="text-muted">No feedback yet</h4>
                 <p className="text-muted">Be the first to share your thoughts!</p>
               </div>
@@ -195,7 +190,6 @@ export default function Feedback() {
                   )}
                   <div className="d-flex justify-content-between align-items-center">
                     <small className="text-muted">
-                      <i className="bi bi-person-circle me-1"></i>
                       {feedback.isAnonymous ? 'Anonymous' : (feedback.submittedBy?.name || 'Anonymous')}
                     </small>
                     <small className="text-muted">
@@ -261,7 +255,6 @@ export default function Feedback() {
                           }}
                           onClick={() => setNewFeedback({ ...newFeedback, rating })}
                         >
-                          <i className={`bi bi-star${newFeedback.rating >= rating ? '-fill' : ''}`}></i>
                         </button>
                       ))}
                     </div>
@@ -283,7 +276,6 @@ export default function Feedback() {
                                     className={`btn btn-sm ${newFeedback.facilities[key] >= v ? 'btn-warning' : 'btn-outline-warning'}`}
                                     onClick={() => setNewFeedback({ ...newFeedback, facilities: { ...newFeedback.facilities, [key]: v } })}
                                   >
-                                    <i className={`bi bi-star${newFeedback.facilities[key] >= v ? '-fill' : ''}`}></i>
                                   </button>
                                 ))}
                               </div>
@@ -320,7 +312,6 @@ export default function Feedback() {
                     Cancel
                   </button>
                   <button type="submit" className="btn btn-warning">
-                    <i className="bi bi-send me-2"></i>
                     Submit Feedback
                   </button>
                 </div>

@@ -110,9 +110,13 @@ export default function Register() {
                     const value = e.target.value;
                     // Auto-capitalize first letter of each word
                     const capitalized = value
-                      .split(' ')
-                      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                      .join(' ');
+                      .split(" ")
+                      .map(
+                        (word) =>
+                          word.charAt(0).toUpperCase() +
+                          word.slice(1).toLowerCase()
+                      )
+                      .join(" ");
                     setName(capitalized);
                   }}
                   required
@@ -203,9 +207,7 @@ export default function Register() {
               <>
                 <div className="alert alert-info">
                   <small>
-                    <i className="bi bi-info-circle me-2"></i>Student account
-                    gives you access to clubs, events, attendance tracking, and
-                    academic resources.
+                    Student account gives you access to clubs, events, attendance tracking, and academic resources.
                   </small>
                 </div>
                 <div className="row mb-3">
@@ -260,9 +262,7 @@ export default function Register() {
               <>
                 <div className="alert alert-info">
                   <small>
-                    <i className="bi bi-info-circle me-2"></i>Teacher account
-                    allows you to manage classes, create exams, and track
-                    student performance.
+                    Teacher account allows you to manage classes, create exams, and track student performance.
                   </small>
                 </div>
                 <div className="row mb-3">
@@ -322,9 +322,7 @@ export default function Register() {
               <>
                 <div className="alert alert-info">
                   <small>
-                    <i className="bi bi-info-circle me-2"></i>Staff account
-                    provides access to administrative functions based on your
-                    role.
+                    Staff account provides access to administrative functions based on your role.                    role.
                   </small>
                 </div>
                 <div className="row mb-3">
@@ -371,14 +369,12 @@ export default function Register() {
 
           {success && (
             <div className="alert alert-success mt-3">
-              <i className="bi bi-check-circle me-2"></i>
               Account created successfully! Redirecting to login...
             </div>
           )}
 
           {error && (
             <div className="alert alert-danger mt-3">
-              <i className="bi bi-exclamation-triangle me-2"></i>
               {error}
             </div>
           )}

@@ -13,18 +13,27 @@ let transporter = null;
 
 if (emailConfigured) {
   transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // true for 465, false for other ports
     auth: {
       user: EMAIL_USER,
       pass: EMAIL_PASS, // Use App Password for Gmail
     },
+    tls: {
+      rejectUnauthorized: false, // Allow self-signed certificates (for development)
+    },
+    connectionTimeout: 10000, // 10 seconds
+    greetingTimeout: 10000,
+    socketTimeout: 10000,
   });
 
-  // Verify transporter configuration
+  // Verify transporter configuration (but don't block startup)
   transporter.verify((error, success) => {
     if (error) {
       console.error('❌ Email service configuration error:', error.message);
       console.log('💡 Check that EMAIL_USER and EMAIL_PASS are correct in .env file');
+      console.log('💡 If on Render/cloud: SMTP may be blocked. Consider using SendGrid or Mailgun instead.');
     } else {
       console.log('✅ Email service ready');
     }
@@ -80,10 +89,10 @@ export async function sendTaskDeadlineEmail(userEmail, userName, task) {
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log(`Task deadline email sent to ${userEmail}`);
+    console.log(`✅ Task deadline email sent to ${userEmail}`);
   } catch (error) {
-    console.error('Error sending task deadline email:', error);
-    throw error;
+    console.error('❌ Error sending task deadline email:', error.message);
+    // Don't throw - make emails optional
   }
 }
 
@@ -133,10 +142,10 @@ export async function sendEventRegistrationEmail(userEmail, userName, event) {
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log(`Event registration email sent to ${userEmail}`);
+    console.log(`✅ Event registration email sent to ${userEmail}`);
   } catch (error) {
-    console.error('Error sending event registration email:', error);
-    throw error;
+    console.error('❌ Error sending event registration email:', error.message);
+    // Don't throw - make emails optional
   }
 }
 
@@ -196,10 +205,10 @@ export async function sendLibraryCheckoutEmail(userEmail, userName, bookDetails,
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log(`Library checkout email sent to ${userEmail}`);
+    console.log(`✅ Library checkout email sent to ${userEmail}`);
   } catch (error) {
-    console.error('Error sending library checkout email:', error);
-    throw error;
+    console.error('❌ Error sending library checkout email:', error.message);
+    // Don't throw - make emails optional
   }
 }
 
@@ -247,9 +256,9 @@ export async function sendTaskCreatedEmail(userEmail, userName, task) {
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log(`Task created email sent to ${userEmail}`);
+    console.log(`✅ Task created email sent to ${userEmail}`);
   } catch (error) {
-    console.error('Error sending task created email:', error);
+    console.error('❌ Error sending task created email:', error.message);
     // Don't throw, task creation should succeed even if email fails
   }
 }

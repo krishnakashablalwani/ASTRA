@@ -108,7 +108,6 @@ export default function Tasks() {
                           <div className="small text-muted">{t.description}</div>
                           {t.dueDate && (
                             <div className="small text-muted mt-1">
-                              <i className="bi bi-calendar3 me-1"></i>
                               Due: {new Date(t.dueDate).toLocaleDateString()}
                             </div>
                           )}
