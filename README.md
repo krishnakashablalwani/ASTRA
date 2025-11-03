@@ -9,15 +9,12 @@ A comprehensive digital campus management platform for events, clubs, academics,
 ## 🚀 Features
 
 - **📅 Event Management** - Create, browse, and RSVP to campus events
-- **🎓 Academic Tools** - Timetables, tasks, leave management
+- **🎓 Academic Tools** - Timetables, tasks
 - **📚 Library System** - Book browsing and checkout management
 - **🤖 AI Chatbot** - Event queries with Google Maps integration
 - **⏱️ Study Timer** - Pomodoro-style focus sessions with history tracking
 - **📸 StudySnap** - Share study moments with the community
-- **🏆 Talent Showcase** - Share your achievements and creative work
 - **🏛️ Clubs** - Join and create student organizations
-- **🔍 Lost & Found** - Community-driven item recovery
-- **📊 Subject Proficiency** - Find study partners by subject
 - **� Feedback** - Rate and improve campus services
 - **�🔔 Notifications** - Real-time push notifications
 - **🌓 Dark/Light Mode** - Customizable theme
@@ -89,7 +86,6 @@ npm run dev
 
 ### Event Management
 - Browse and create campus events
-- RSVP functionality
 - AI-powered event chatbot with Google Maps
 - Email confirmations
 
@@ -97,8 +93,6 @@ npm run dev
 - **Tasks** - Assignment tracking with AI improvement suggestions
 - **Timer** - Pomodoro study sessions with session history
 - **Timetables** - Upload and view class schedules
-- **Leave** - Apply for and manage leave requests
-- **Subject Proficiency** - Find study partners by subject expertise
 
 ### Library System
 - Book catalog browsing
@@ -108,9 +102,7 @@ npm run dev
 
 ### Social Features
 - **StudySnap** - Share study photos and moments
-- **Talent Showcase** - Student achievements and creative work
 - **Clubs** - Join and create student organizations
-- **Lost & Found** - Community item recovery system
 - **Feedback** - Rate campus services and facilities
 
 ### Admin Features
@@ -326,19 +318,19 @@ npm run preview    # Preview build
 **ASTRA Development Team**
 
 ### Krishna Kashab Lalwani - Team Leader
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](YOUR_GITHUB_LINK_HERE)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](YOUR_LINKEDIN_LINK_HERE)
-[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](YOUR_INSTAGRAM_LINK_HERE)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/krishnakashablalwani)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/krishna-kashab-lalwani/)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/krishnakashablalwani/)
 
 ### Kaveti Sanjana - Team Member
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](YOUR_GITHUB_LINK_HERE)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](YOUR_LINKEDIN_LINK_HERE)
-[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](YOUR_INSTAGRAM_LINK_HERE)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/KavetiSanjana)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sanjana-kaveti-8230a9391/)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/sanjanakaveti_/)
 
 ### Mooli Tanvi Reddy - Team Member
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](YOUR_GITHUB_LINK_HERE)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/10VReddy)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](YOUR_LINKEDIN_LINK_HERE)
-[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](YOUR_INSTAGRAM_LINK_HERE)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/sparkle_tanvi_reddy/)
 
 ---
 
