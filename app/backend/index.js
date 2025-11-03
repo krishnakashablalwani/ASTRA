@@ -39,6 +39,7 @@ import { sendTaskDeadlineEmail } from './services/emailService.js';
 // Models for optional auto-seed
 import User from './models/User.js';
 import Club from './models/Club.js';
+import Announcement from './models/Announcement.js';
 
 // App setup
 const app = express();
@@ -140,7 +141,22 @@ mongoose.connect(MONGODB_URI, {
         { title: 'Welcome Meetup', description: 'Kickoff event', date: new Date(Date.now()+86400000), location: 'Auditorium', createdBy: admin._id, club: club1._id },
         { title: 'Art Exhibition', description: 'Showcase talents', date: new Date(Date.now()+172800000), location: 'Gallery', createdBy: admin._id, club: club2._id }
       ]);
-      console.log('Auto-seed complete: default admin, clubs, and events created.');
+      
+      // Create 2 mock exam announcements
+      await Announcement.create([
+        { 
+          title: 'Mid-Term Examinations - December 2025', 
+          content: 'Mid-term exams will be held from December 15-20, 2025. Please review the exam schedule posted on the notice board. Students must carry their ID cards and arrive 15 minutes before the exam starts. Good luck!',
+          createdBy: admin._id
+        },
+        { 
+          title: 'Final Semester Examinations - January 2026', 
+          content: 'Final semester exams are scheduled for January 10-25, 2026. Exam hall allocation and seat numbers will be announced one week prior. Students should check their exam admit cards on the student portal. Prepare well!',
+          createdBy: admin._id
+        }
+      ]);
+      
+      console.log('Auto-seed complete: default admin, clubs, events, and exam announcements created.');
     }
     
     // Always ensure the special ASTRA admin account exists
