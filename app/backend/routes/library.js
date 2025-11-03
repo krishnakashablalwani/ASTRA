@@ -1,7 +1,6 @@
 import express from 'express';
 import { Book, Checkout } from '../models/Library.js';
 import User from '../models/User.js';
-import CalendarIntegration from '../models/CalendarIntegration.js';
 import { authenticate, authorizeRoles } from '../middleware/auth.js';
 import { sendLibraryCheckoutEmail } from '../services/emailService.js';
 
@@ -65,16 +64,6 @@ router.post('/checkout', authenticate, authorizeRoles('staff', 'admin'), async (
     book.available = book.availableQuantity > 0;
     await book.save();
     
-    // Create calendar event for return deadline
-    const calendarEvent = new CalendarIntegration({
-      user: student._id,
-      eventTitle: `Return Book: ${book.title}`,
-      eventDate: new Date(returnDeadline),
-      eventType: 'library',
-      description: `Book Code: ${bookCode} - Return deadline`
-    });
-    await calendarEvent.save();
-    
     // Send checkout confirmation email
     try {
       if (student.email) {
@@ -85,7 +74,7 @@ router.post('/checkout', authenticate, authorizeRoles('staff', 'admin'), async (
       // Don't fail the request if email fails
     }
     
-    res.status(201).json({ checkout, calendarEvent });
+    res.status(201).json({ checkout });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

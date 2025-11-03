@@ -48,16 +48,6 @@ export default function About() {
       desc: "Track focused study sessions with Pomodoro technique",
     },
     {
-      icon: "bi-graph-up",
-      title: "Subject Proficiency",
-      desc: "Monitor your progress across different subjects",
-    },
-    {
-      icon: "bi-search",
-      title: "Lost & Found",
-      desc: "Report and find lost items on campus",
-    },
-    {
       icon: "bi-chat-dots",
       title: "AI Chatbot",
       desc: "Get instant help with campus queries",
@@ -97,7 +87,7 @@ export default function About() {
         <p className="lead text-muted">Your Unified Hub for Campus Life</p>
         <div className="d-flex justify-content-center gap-3 mt-3">
           <span className="badge bg-primary px-3 py-2">v1.0.0</span>
-          <span className="badge bg-success px-3 py-2">20+ Features</span>
+          <span className="badge bg-success px-3 py-2">15+ Features</span>
           <span className="badge bg-info px-3 py-2">AI-Powered</span>
         </div>
       </div>

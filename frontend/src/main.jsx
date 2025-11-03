@@ -11,13 +11,10 @@ import Dashboard from './pages/Dashboard'
 import Calendar from './pages/Calendar'
 import Clubs from './pages/Clubs'
 import Notifications from './pages/Notifications'
-import Leave from './pages/Leave'
 import Timetables from './pages/Timetables'
 import Tasks from './pages/Tasks'
 import TalentShowcase from './pages/TalentShowcase'
-import SubjectProficiency from './pages/SubjectProficiency'
 import Library from './pages/Library'
-import LostAndFound from './pages/LostAndFound'
 import StudySnap from './pages/StudySnap'
 import Timer from './pages/Timer'
 import Feedback from './pages/Feedback'
@@ -53,13 +50,10 @@ createRoot(document.getElementById('root')).render(
             <Route path="/calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
             <Route path="/clubs" element={<ProtectedRoute><Clubs /></ProtectedRoute>} />
             <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
-            <Route path="/leave" element={<ProtectedRoute><Leave /></ProtectedRoute>} />
             <Route path="/timetables" element={<ProtectedRoute><Timetables /></ProtectedRoute>} />
             <Route path="/tasks" element={<ProtectedRoute><Tasks /></ProtectedRoute>} />
             <Route path="/showcase" element={<ProtectedRoute><TalentShowcase /></ProtectedRoute>} />
-            <Route path="/proficiency" element={<ProtectedRoute><SubjectProficiency /></ProtectedRoute>} />
             <Route path="/library" element={<ProtectedRoute><Library /></ProtectedRoute>} />
-            <Route path="/lost-found" element={<ProtectedRoute><LostAndFound /></ProtectedRoute>} />
             <Route path="/studysnap" element={<ProtectedRoute><StudySnap /></ProtectedRoute>} />
             <Route path="/timer" element={<ProtectedRoute><Timer /></ProtectedRoute>} />
             <Route path="/feedback" element={<ProtectedRoute><Feedback /></ProtectedRoute>} />

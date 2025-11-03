@@ -1,11 +1,11 @@
 import express from 'express';
 import Exam from '../models/Exam.js';
-import auth from '../middleware/auth.js';
+import { authenticate, authorizeRoles } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // Get all exams
-router.get('/', auth, async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const exams = await Exam.find()
       .populate('createdBy', 'name email')
@@ -17,7 +17,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // Get single exam
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', authenticate, async (req, res) => {
   try {
     const exam = await Exam.findById(req.params.id)
       .populate('createdBy', 'name email');
@@ -29,7 +29,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // Create exam (admin only)
-router.post('/', auth, async (req, res) => {
+router.post('/', authenticate, async (req, res) => {
   try {
     if (req.user.role !== 'admin') {
       return res.status(403).json({ error: 'Admin access required' });
@@ -47,7 +47,7 @@ router.post('/', auth, async (req, res) => {
 });
 
 // Update exam (admin only)
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', authenticate, async (req, res) => {
   try {
     if (req.user.role !== 'admin') {
       return res.status(403).json({ error: 'Admin access required' });
@@ -67,7 +67,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 // Delete exam (admin only)
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', authenticate, async (req, res) => {
   try {
     if (req.user.role !== 'admin') {
       return res.status(403).json({ error: 'Admin access required' });
