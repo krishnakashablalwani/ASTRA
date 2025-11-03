@@ -13,16 +13,15 @@ const emailConfigured = !!BREVO_API_KEY;
 let apiInstance = null;
 
 if (emailConfigured) {
-  const defaultClient = brevo.ApiClient.instance;
-  const apiKey = defaultClient.authentications['api-key'];
-  apiKey.apiKey = BREVO_API_KEY;
-  
+  // Create API instance with authentication
   apiInstance = new brevo.TransactionalEmailsApi();
+  apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, BREVO_API_KEY);
+  
   console.log('‚úÖ Email service ready (Brevo API - 300 emails/day free)');
-  console.log('Ì≤° Using HTTP API (works on Render, no SMTP ports needed)');
+  console.log('üí° Using HTTP API (works on Render, no SMTP ports needed)');
 } else {
   console.warn('‚ö†Ô∏è  Email service not configured. Add BREVO_API_KEY to .env');
-  console.log('Ì≤° Get free API key: https://app.brevo.com/settings/keys/api');
+  console.log('üí° Get free API key: https://app.brevo.com/settings/keys/api');
 }
 
 // Helper to send emails via Brevo API
@@ -51,7 +50,7 @@ export async function sendTaskDeadlineEmail(userEmail, userName, task) {
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <div style="background: linear-gradient(135deg, #FFD54F 0%, #F59E0B 100%); padding: 20px; border-radius: 10px 10px 0 0;">
-        <h1 style="color: white; margin: 0;">Ì∞ù CampusHive</h1>
+        <h1 style="color: white; margin: 0;">ÔøΩÔøΩÔøΩ CampusHive</h1>
       </div>
       <div style="padding: 30px; background: #f8f9fa; border-radius: 0 0 10px 10px;">
         <h2 style="color: #212529;">Hi ${userName},</h2>
@@ -59,7 +58,7 @@ export async function sendTaskDeadlineEmail(userEmail, userName, task) {
         <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #F59E0B;">
           <h3 style="color: #F59E0B; margin-top: 0;">${task.title}</h3>
           ${task.description ? `<p style="color: #6c757d;">${task.description}</p>` : ''}
-          <p style="color: #212529; font-weight: bold;">Ì≥Ö Due: ${new Date(task.dueDate).toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+          <p style="color: #212529; font-weight: bold;">ÔøΩÔøΩÔøΩ Due: ${new Date(task.dueDate).toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
           ${task.priority ? `<p style="color: #6c757d;">Priority: <span style="color: #dc3545; font-weight: bold;">${task.priority}</span></p>` : ''}
         </div>
         <p style="color: #6c757d;">Log in to CampusHive to manage your tasks.</p>
@@ -74,16 +73,16 @@ export async function sendEventRegistrationEmail(userEmail, userName, event) {
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <div style="background: linear-gradient(135deg, #FFD54F 0%, #F59E0B 100%); padding: 20px; border-radius: 10px 10px 0 0;">
-        <h1 style="color: white; margin: 0;">Ì∞ù CampusHive</h1>
+        <h1 style="color: white; margin: 0;">ÔøΩÔøΩÔøΩ CampusHive</h1>
       </div>
       <div style="padding: 30px; background: #f8f9fa; border-radius: 0 0 10px 10px;">
         <h2 style="color: #212529;">Hi ${userName},</h2>
-        <p style="color: #28a745; font-size: 18px; font-weight: bold;">You're registered for this event! Ìæâ</p>
+        <p style="color: #28a745; font-size: 18px; font-weight: bold;">You're registered for this event! ÔøΩÔøΩÔøΩ</p>
         <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #28a745;">
           <h3 style="color: #28a745; margin-top: 0;">${event.title}</h3>
           ${event.description ? `<p style="color: #6c757d;">${event.description}</p>` : ''}
-          <p style="color: #212529; margin: 5px 0;"><strong>Ì≥Ö Date:</strong> ${new Date(event.date).toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
-          ${event.location ? `<p style="color: #212529; margin: 5px 0;"><strong>Ì≥ç Location:</strong> ${event.location}</p>` : ''}
+          <p style="color: #212529; margin: 5px 0;"><strong>ÔøΩÔøΩÔøΩ Date:</strong> ${new Date(event.date).toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+          ${event.location ? `<p style="color: #212529; margin: 5px 0;"><strong>ÔøΩÔøΩÔøΩ Location:</strong> ${event.location}</p>` : ''}
         </div>
         <p style="color: #6c757d;">See you there!</p>
       </div>
@@ -93,19 +92,19 @@ export async function sendEventRegistrationEmail(userEmail, userName, event) {
 }
 
 export async function sendLibraryCheckoutEmail(userEmail, userName, bookDetails, checkout) {
-  const subject = `Ì≥ö Book Checked Out: ${bookDetails.title}`;
+  const subject = `ÔøΩÔøΩÔøΩ Book Checked Out: ${bookDetails.title}`;
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <div style="background: linear-gradient(135deg, #FFD54F 0%, #F59E0B 100%); padding: 20px; border-radius: 10px 10px 0 0;">
-        <h1 style="color: white; margin: 0;">Ì≥ö CampusHive Library</h1>
+        <h1 style="color: white; margin: 0;">ÔøΩÔøΩÔøΩ CampusHive Library</h1>
       </div>
       <div style="padding: 30px; background: #f8f9fa; border-radius: 0 0 10px 10px;">
         <h2 style="color: #212529;">Hi ${userName},</h2>
-        <p style="color: #007bff; font-size: 18px; font-weight: bold;">Book checked out! Ì≥ñ</p>
+        <p style="color: #007bff; font-size: 18px; font-weight: bold;">Book checked out! ÔøΩÔøΩÔøΩ</p>
         <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #007bff;">
           <h3 style="color: #007bff; margin-top: 0;">${bookDetails.title}</h3>
-          <p><strong>Ì≥ï Code:</strong> ${bookDetails.bookCode}</p>
-          <p><strong>Ì≥Ö Checkout:</strong> ${new Date(checkout.checkoutDate).toLocaleDateString()}</p>
+          <p><strong>ÔøΩÔøΩÔøΩ Code:</strong> ${bookDetails.bookCode}</p>
+          <p><strong>ÔøΩÔøΩÔøΩ Checkout:</strong> ${new Date(checkout.checkoutDate).toLocaleDateString()}</p>
           <p style="color: #dc3545; font-weight: bold;"><strong>‚è∞ Return By:</strong> ${new Date(checkout.returnDeadline).toLocaleDateString()}</p>
         </div>
       </div>
@@ -119,7 +118,7 @@ export async function sendTaskCreatedEmail(userEmail, userName, task) {
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <div style="background: linear-gradient(135deg, #FFD54F 0%, #F59E0B 100%); padding: 20px; border-radius: 10px 10px 0 0;">
-        <h1 style="color: white; margin: 0;">Ì∞ù CampusHive</h1>
+        <h1 style="color: white; margin: 0;">ÔøΩÔøΩÔøΩ CampusHive</h1>
       </div>
       <div style="padding: 30px; background: #f8f9fa; border-radius: 0 0 10px 10px;">
         <h2 style="color: #212529;">Hi ${userName},</h2>
@@ -127,7 +126,7 @@ export async function sendTaskCreatedEmail(userEmail, userName, task) {
         <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #28a745;">
           <h3 style="color: #28a745; margin-top: 0;">${task.title}</h3>
           ${task.description ? `<p style="color: #6c757d;">${task.description}</p>` : ''}
-          ${task.dueDate ? `<p style="color: #212529; font-weight: bold;">Ì≥Ö Due: ${new Date(task.dueDate).toLocaleString()}</p>` : ''}
+          ${task.dueDate ? `<p style="color: #212529; font-weight: bold;">ÔøΩÔøΩÔøΩ Due: ${new Date(task.dueDate).toLocaleString()}</p>` : ''}
         </div>
       </div>
     </div>
