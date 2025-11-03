@@ -2,8 +2,9 @@
 
 ## Prerequisites
 - Node.js (v18+)
-- MongoDB (running on localhost:27017)
+- MongoDB (local install OR MongoDB Atlas - free tier)
 - Modern web browser
+- Brevo account (free - 300 emails/day)
 
 ## Installation & Setup
 
@@ -17,20 +18,24 @@ npm install
 Create `.env` file in `app/backend/`:
 ```env
 PORT=3000
+
+# MongoDB - Use localhost for local dev, Atlas for production
 MONGODB_URI=mongodb://localhost:27017/campushive
+# For production (MongoDB Atlas):
+# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/campushive
+
 JWT_SECRET=your_jwt_secret
 
-# AI Configuration (Groq)
+# AI Configuration (Groq - Free)
 GROQ_API_KEY=your_groq_api_key
 GROQ_MODEL=llama-3.3-70b-versatile
 
-# Email Configuration (Brevo - Free SMTP)
-# Sign up at https://www.brevo.com (300 emails/day, no credit card)
-BREVO_SMTP_LOGIN=your_brevo_smtp_login
+# Email Configuration (Brevo API - 300 emails/day free)
+# Get API key: https://app.brevo.com/settings/keys/api
+BREVO_API_KEY=your_brevo_api_key
 EMAIL_FROM=noreply@campushive.app
-BREVO_SMTP_KEY=your_brevo_smtp_key
 
-# Push Notifications
+# Push Notifications (Generate with web-push)
 VAPID_PUBLIC_KEY=your_vapid_public_key
 VAPID_PRIVATE_KEY=your_vapid_private_key
 ```
@@ -143,9 +148,17 @@ Click the 🌙 (moon) or ☀️ (sun) icon in the navbar to switch between dark 
 ## Troubleshooting
 
 ### Backend Not Starting
-- Check if MongoDB is running: `mongod --version`
+- **MongoDB Connection Failed**: 
+  - Local: Check if MongoDB is running: `mongod --version`
+  - Atlas: Verify connection string format and credentials
+  - Check if password has special characters (needs URL encoding)
 - Verify port 3000 is available
 - Check `.env` file configuration
+
+### Email Service Issues
+- Get Brevo API key from: https://app.brevo.com/settings/keys/api
+- Ensure `BREVO_API_KEY` and `EMAIL_FROM` are set in `.env`
+- Check logs for "Email service ready" confirmation
 
 ### Frontend Build Issues
 - Clear node_modules: `rm -rf node_modules && npm install`

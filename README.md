@@ -51,7 +51,11 @@ See [QUICKSTART.md](QUICKSTART.md) for detailed setup instructions.
 # Backend
 cd app/backend
 npm install
-# Add .env file with MONGODB_URI, JWT_SECRET, GROQ_API_KEY
+# Add .env file with:
+# - MONGODB_URI (localhost or MongoDB Atlas)
+# - JWT_SECRET
+# - BREVO_API_KEY (from https://app.brevo.com/settings/keys/api)
+# - GROQ_API_KEY
 npm start
 
 # Frontend
@@ -68,7 +72,7 @@ npm run dev
 - Node.js + Express.js
 - MongoDB + Mongoose
 - JWT Authentication
-- Nodemailer (Email)
+- Brevo API (Email Service)
 - web-push (Notifications)
 - Groq AI (Llama 3.3)
 
@@ -128,16 +132,16 @@ NODE_ENV=development
 
 # Database
 MONGODB_URI=mongodb://localhost:27017/campushive
+# For production (MongoDB Atlas):
+# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/campushive
 
 # Authentication
 JWT_SECRET=your_secret_key
 
-# Email (Brevo - Free SMTP)
-# Sign up at https://www.brevo.com (300 emails/day, no credit card)
-# Get SMTP key from https://app.brevo.com/settings/keys/smtp
-BREVO_SMTP_LOGIN=your_brevo_smtp_login
+# Email (Brevo API - 300 emails/day free)
+# Get API key from https://app.brevo.com/settings/keys/api
+BREVO_API_KEY=your_brevo_api_key
 EMAIL_FROM=noreply@campushive.app
-BREVO_SMTP_KEY=your_brevo_smtp_key
 
 # AI
 GROQ_API_KEY=gsk_your_groq_api_key
@@ -203,22 +207,67 @@ VAPID_PRIVATE_KEY=your_vapid_private_key
 
 ## 🚀 Deployment
 
-### Render.com
+### Render.com (Recommended)
 
-1. Push to GitHub
-2. Create new Web Service for backend
-3. Create new Static Site for frontend
-4. Add environment variables
-5. Deploy!
+**Backend Setup:**
+1. Push code to GitHub
+2. Go to https://render.com → New → Web Service
+3. Connect your GitHub repository
+4. Settings:
+   - **Build Command:** `cd app/backend && npm install`
+   - **Start Command:** `cd app/backend && npm start`
+   - **Environment:** Node
+5. Add Environment Variables:
+   ```
+   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/campushive
+   JWT_SECRET=your_random_secret_key
+   BREVO_API_KEY=xkeysib-your-api-key
+   EMAIL_FROM=noreply@campushive.app
+   GROQ_API_KEY=gsk_your_groq_key
+   GROQ_MODEL=llama-3.3-70b-versatile
+   VAPID_PUBLIC_KEY=your_vapid_public
+   VAPID_PRIVATE_KEY=your_vapid_private
+   ADMIN_EMAIL=admin@example.com
+   ADMIN_PASSWORD=secure_password
+   ```
+6. Click "Create Web Service"
 
-See `render.yaml` for configuration.
+**Frontend Setup:**
+1. Render Dashboard → New → Static Site
+2. Connect same repository
+3. Settings:
+   - **Build Command:** `cd frontend && npm install && npm run build`
+   - **Publish Directory:** `frontend/dist`
+4. Deploy!
 
-### MongoDB Atlas
+**Important Notes:**
+- ⚠️ **MongoDB Atlas Required:** Render doesn't support localhost MongoDB
+- ⚠️ **Use API Keys:** Make sure to use Brevo API key (not SMTP)
+- ⚠️ **URL-Encode Passwords:** If MongoDB password has special characters (@, #, $), URL-encode them
 
-1. Create free cluster at mongodb.com
-2. Create database user
-3. Whitelist IP (0.0.0.0/0)
-4. Copy connection string to MONGODB_URI
+See `render.yaml` for configuration reference.
+
+### MongoDB Atlas (Required for Render)
+
+1. Go to https://www.mongodb.com/cloud/atlas/register
+2. Create free M0 cluster (512MB storage - free forever)
+3. **Database Access:**
+   - Click "Database Access" → Add New User
+   - Username: `campushive`
+   - Password: Set secure password (avoid special characters or URL-encode them)
+   - Privileges: "Read and write to any database"
+4. **Network Access:**
+   - Click "Network Access" → Add IP Address
+   - Enter: `0.0.0.0/0` (allow from anywhere)
+   - Or add Render's IP range for better security
+5. **Get Connection String:**
+   - Click "Database" → Connect → Connect your application
+   - Copy connection string:
+     ```
+     mongodb+srv://campushive:PASSWORD@cluster0.xxxxx.mongodb.net/campushive
+     ```
+   - Replace `PASSWORD` with your actual password
+   - Add to Render as `MONGODB_URI` environment variable
 
 ---
 
