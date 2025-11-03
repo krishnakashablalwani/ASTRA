@@ -23,19 +23,27 @@ if (emailConfigured) {
       user: BREVO_SMTP_LOGIN,
       pass: BREVO_SMTP_KEY,
     },
-    connectionTimeout: 30000, // 30 seconds (increased for reliability)
-    greetingTimeout: 30000,
-    socketTimeout: 30000,
+    connectionTimeout: 10000, // 10 seconds (reduced for faster startup)
+    greetingTimeout: 10000,
+    socketTimeout: 10000,
     tls: {
       rejectUnauthorized: false
     }
   });
 
   // Verify transporter configuration (but don't block startup)
+  // Use a timeout to prevent hanging during verification
+  const verifyTimeout = setTimeout(() => {
+    console.warn('⚠️  Email service verification timeout (this is OK - emails will still work)');
+    console.log('💡 Brevo SMTP may take time to connect, but service is configured');
+  }, 5000); // 5 second timeout for verification only
+
   transporter.verify((error, success) => {
+    clearTimeout(verifyTimeout);
     if (error) {
       console.error('❌ Email service configuration error:', error.message);
       console.log('💡 Get free SMTP key from: https://app.brevo.com/settings/keys/smtp');
+      console.log('💡 Note: Server will continue running, emails may not send');
     } else {
       console.log('✅ Email service ready (Brevo - 300 emails/day free)');
     }

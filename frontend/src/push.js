@@ -39,6 +39,20 @@ export async function initPush() {
     }
     const applicationServerKey = await urlBase64ToUint8Array(pub)
 
+    // Check for existing subscription
+    const existingSubscription = await reg.pushManager.getSubscription()
+    
+    if (existingSubscription) {
+      // Unsubscribe from old subscription (in case VAPID keys changed)
+      try {
+        await existingSubscription.unsubscribe()
+        console.log('Unsubscribed from old push subscription')
+      } catch (err) {
+        console.warn('Failed to unsubscribe from old subscription:', err)
+      }
+    }
+
+    // Create new subscription with current VAPID key
     const subscription = await reg.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey
@@ -46,6 +60,7 @@ export async function initPush() {
 
     // Send subscription to backend
     await api.post('/push/subscribe', subscription)
+    console.log('✅ Push notifications subscribed successfully')
   } catch (err) {
     console.error('Push subscription error:', err)
   }

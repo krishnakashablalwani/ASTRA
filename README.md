@@ -9,13 +9,19 @@ A comprehensive digital campus management platform for events, clubs, academics,
 ## 🚀 Features
 
 - **📅 Event Management** - Create, browse, and RSVP to campus events
-- **🎓 Academic Tools** - Timetables, tasks, attendance tracking
+- **🎓 Academic Tools** - Timetables, tasks, leave management
 - **📚 Library System** - Book browsing and checkout management
 - **🤖 AI Chatbot** - Event queries with Google Maps integration
-- **⏱️ Study Timer** - Pomodoro-style focus sessions
+- **⏱️ Study Timer** - Pomodoro-style focus sessions with history tracking
 - **📸 StudySnap** - Share study moments with the community
-- **🔔 Notifications** - Real-time push notifications
+- **🏆 Talent Showcase** - Share your achievements and creative work
+- **🏛️ Clubs** - Join and create student organizations
+- **🔍 Lost & Found** - Community-driven item recovery
+- **📊 Subject Proficiency** - Find study partners by subject
+- **� Feedback** - Rate and improve campus services
+- **�🔔 Notifications** - Real-time push notifications
 - **🌓 Dark/Light Mode** - Customizable theme
+- **👤 Profile Management** - Update your information and preferences
 
 ---
 
@@ -84,28 +90,30 @@ npm run dev
 - Email confirmations
 
 ### Academic Tools
-- **Tasks** - Assignment tracking with AI improvement
-- **Timer** - Pomodoro study sessions with history
-- **Timetables** - Upload and view schedules
-- **Subject Proficiency** - Find study partners
+- **Tasks** - Assignment tracking with AI improvement suggestions
+- **Timer** - Pomodoro study sessions with session history
+- **Timetables** - Upload and view class schedules
+- **Leave** - Apply for and manage leave requests
+- **Subject Proficiency** - Find study partners by subject expertise
 
 ### Library System
 - Book catalog browsing
 - Checkout/return management
 - Due date tracking
-- Email reminders
+- Email reminders for returns
 
 ### Social Features
-- **StudySnap** - Share study photos
-- **Talent Showcase** - Student achievements
-- **Clubs** - Join and create organizations
-- **Lost & Found** - Community item recovery
+- **StudySnap** - Share study photos and moments
+- **Talent Showcase** - Student achievements and creative work
+- **Clubs** - Join and create student organizations
+- **Lost & Found** - Community item recovery system
+- **Feedback** - Rate campus services and facilities
 
 ### Admin Features
 - User management
 - Platform analytics
 - Announcements
-- Activity logs
+- Activity monitoring
 
 ---
 
@@ -124,9 +132,12 @@ MONGODB_URI=mongodb://localhost:27017/campushive
 # Authentication
 JWT_SECRET=your_secret_key
 
-# Email (Gmail)
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASS=your-gmail-app-password
+# Email (Brevo - Free SMTP)
+# Sign up at https://www.brevo.com (300 emails/day, no credit card)
+# Get SMTP key from https://app.brevo.com/settings/keys/smtp
+BREVO_SMTP_LOGIN=your_brevo_smtp_login
+EMAIL_FROM=noreply@campushive.app
+BREVO_SMTP_KEY=your_brevo_smtp_key
 
 # AI
 GROQ_API_KEY=gsk_your_groq_api_key

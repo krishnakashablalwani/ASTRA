@@ -19,7 +19,20 @@ Create `.env` file in `app/backend/`:
 PORT=3000
 MONGODB_URI=mongodb://localhost:27017/campushive
 JWT_SECRET=your_jwt_secret
-LLAMA_API_KEY=4809d130-bd87-4484-9620-2359df365f8a
+
+# AI Configuration (Groq)
+GROQ_API_KEY=your_groq_api_key
+GROQ_MODEL=llama-3.3-70b-versatile
+
+# Email Configuration (Brevo - Free SMTP)
+# Sign up at https://www.brevo.com (300 emails/day, no credit card)
+BREVO_SMTP_LOGIN=your_brevo_smtp_login
+EMAIL_FROM=noreply@campushive.app
+BREVO_SMTP_KEY=your_brevo_smtp_key
+
+# Push Notifications
+VAPID_PUBLIC_KEY=your_vapid_public_key
+VAPID_PRIVATE_KEY=your_vapid_private_key
 ```
 
 ### 3. Start Backend
@@ -59,64 +72,59 @@ http://localhost:3000
 ### 🎨 Core Features
 - ✅ Dark/Light Mode Toggle
 - ✅ Responsive Design
-- ✅ AI-Powered Assistance
+- ✅ AI-Powered Event Chatbot
 - ✅ Professional UI/UX
+- ✅ Real-time Push Notifications
+- ✅ Profile Management
 
 ### 📚 Academic Features
-1. **Attendance Tracker** - Monitor attendance with smart skip calculator
-2. **Timetables** - Manage your class schedule
-3. **Tasks** - AI-powered task prioritization
-4. **PYQ Papers** - Access previous year question papers
-5. **Library** - Issue and return books
-6. **Subject Proficiency** - Find study partners
+1. **Timetables** - Manage your class schedule
+2. **Tasks** - AI-powered task improvement suggestions
+3. **Timer** - Pomodoro study sessions with history
+4. **Leave** - Apply for and manage leave requests
+5. **Library** - Book browsing and checkout system
+6. **Subject Proficiency** - Find study partners by subject
 
 ### 🎯 Campus Life
-7. **Events** - Browse upcoming campus events
-8. **Clubs** - Join and manage clubs
-9. **Talent Showcase** - Share your creative work
-10. **Lost & Found** - Community help center
-11. **StudySnap** - Share study sessions
-12. **Feedback** - Rate campus services
+7. **Events** - Browse and RSVP to campus events
+8. **Clubs** - Join and manage student clubs
+9. **Talent Showcase** - Share your creative work and achievements
+10. **Lost & Found** - Community-driven item recovery
+11. **StudySnap** - Share study sessions and moments
+12. **Feedback** - Rate campus services and facilities
+13. **Calendar** - View all events in calendar format
 
 ### 🤖 AI-Powered Tools
-13. **Event Chatbot** - Ask about events, get Google Maps links
-14. **AI Chat Assistant** - General campus queries
-15. **Smart Notifications** - Prioritized updates
-16. **Task Analysis** - AI-driven task prioritization
+14. **Event Chatbot** - Ask about events, get Google Maps links
+15. **Task Improvement** - AI suggestions for task descriptions
+16. **Smart Notifications** - Prioritized real-time updates
 
 ### 📅 Organization
 17. **Google Calendar Integration** - Export events to Google Calendar
-18. **Study Timer** - Pomodoro technique timer
-19. **Fee Tracker** - Monitor fee payments
-20. **Leave Management** - Apply for leave
-
-### 💬 Communication
-21. **Collaborative Spaces** - Share classwork
-22. **Notifications** - Stay updated
-23. **Real-time Updates** - Live notifications
+18. **Study Timer** - Track focused study sessions
+19. **Notifications Center** - Centralized notification management
 
 ## Navigation Guide
 
 ### Main Menu
-- **Overview** - Dashboard with quick stats
-- **Calendar** - Academic calendar with events
-- **Attendance** - Track your attendance
-- **Clubs** - Manage club memberships
+- **Dashboard** - Overview with quick stats and AI assistant
+- **Calendar** - View events in calendar format
+- **Clubs** - Browse and join student clubs
 - **Notifications** - View all notifications
-- **Spaces** - Collaborative workspaces
-- **Leave** - Apply for leave
-- **Timetables** - View/upload timetables
-- **Tasks** - Manage tasks with AI
-- **Showcase** - Talent showcase
-- **Proficiency** - Find study partners
-- **Library** - Browse books
-- **PYQ** - Question papers
-- **Fees** - Fee tracking
-- **Lost & Found** - Community help
-- **StudySnap** - Study photos
-- **Timer** - Study timer
-- **Feedback** - Submit feedback
-- **Event Bot** - AI chatbot
+- **Leave** - Apply for leave requests
+- **Timetables** - View/upload class schedules
+- **Tasks** - Manage tasks with AI improvement
+- **Talent Showcase** - Share achievements
+- **Subject Proficiency** - Find study partners
+- **Library** - Browse and checkout books
+- **Lost & Found** - Community item recovery
+- **StudySnap** - Share study photos
+- **Timer** - Pomodoro study sessions
+- **Feedback** - Rate campus services
+- **Event Chatbot** - AI-powered event assistant
+- **Profile** - Manage your account
+- **About** - Information about CampusHive
+- **Admin Dashboard** - Platform management (admin only)
 
 ## Theme Toggle
 
@@ -125,10 +133,12 @@ Click the 🌙 (moon) or ☀️ (sun) icon in the navbar to switch between dark 
 ## Tips for Best Experience
 
 1. **First Login**: Use the default credentials to explore the app
-2. **Add Data**: Create events, clubs, and tasks to see the full functionality
-3. **Try AI Features**: Use the Event Chatbot and AI Assistant
-4. **Explore All Pages**: Check out all 20+ feature pages
-5. **Test Responsiveness**: Try the app on different screen sizes
+2. **Add Data**: Create events, clubs, and tasks to see full functionality
+3. **Try AI Features**: Use the Event Chatbot for event queries with maps
+4. **Enable Notifications**: Allow browser notifications for real-time updates
+5. **Explore All Pages**: Check out all 18 feature pages
+6. **Test Responsiveness**: Try the app on different screen sizes
+7. **Dark Mode**: Toggle between light and dark themes for your preference
 
 ## Troubleshooting
 
@@ -161,7 +171,8 @@ Click the 🌙 (moon) or ☀️ (sun) icon in the navbar to switch between dark 
 - `POST /api/clubs` - Create club
 
 ### AI
-- `POST /api/ai/chat` - Chat with AI assistant
+- `POST /api/ai/chat` - Event chatbot queries
+- `POST /api/tasks/improve` - AI task improvement suggestions
 
 ### More endpoints available in backend routes...
 
@@ -208,10 +219,11 @@ For issues or questions:
 ## Credits
 
 Built with:
-- React + Vite
+- React 18.2 + Vite 5.1
 - Express.js + MongoDB
-- Bootstrap 5
-- SambaNova Llama AI
+- Bootstrap 5.3
+- Groq AI (Llama 3.3)
+- Brevo Email Service
 - ❤️ and lots of coffee
 
 ---
