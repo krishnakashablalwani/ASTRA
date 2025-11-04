@@ -25,7 +25,7 @@ export default function App() {
             <span>CampusHive</span>
           </Link>
 
-          <div className="ms-auto d-flex align-items-center gap-2">
+          <div className="ms-auto d-flex align-items-center gap-2 flex-nowrap">
             {!isAuthed ? (
               <>
                 <Link className="btn btn-sm btn-outline-secondary" to="/login">Login</Link>
@@ -33,7 +33,18 @@ export default function App() {
               </>
             ) : (
               <>
-                <button className="btn btn-sm btn-outline-secondary" onClick={logout}>Logout</button>
+                <div className="btn-group" role="group" aria-label="Repo and logout">
+                  <a
+                    className="btn btn-sm btn-outline-secondary d-flex align-items-center px-2"
+                    href="https://github.com/krishnakashablalwani/ASTRA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Open GitHub repository"
+                  >
+                    <span className="d-none d-sm-inline ms-1">GitHub</span>
+                  </a>
+                  <button className="btn btn-sm btn-outline-secondary px-2" onClick={logout}>Logout</button>
+                </div>
               </>
             )}
             <button className="btn btn-sm btn-outline-warning" onClick={toggleTheme} title="Toggle theme">

@@ -335,7 +335,7 @@ npm run preview    # Preview build
 
 ### Mooli Tanvi Reddy - Team Member
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/10VReddy)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](YOUR_LINKEDIN_LINK_HERE)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)]([http://www.linkedin.com/in/mooli-tanvi-reddy-70616b391](http://www.linkedin.com/in/mooli-tanvi-reddy-70616b391))
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/sparkle_tanvi_reddy/)
 
 ---

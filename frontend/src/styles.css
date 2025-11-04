@@ -132,7 +132,7 @@ header h1 {
 }
 
 nav a {
-	margin-right: 1.5rem;
+	margin-right: 0;
 	color: var(--nectar-secondary);
 	text-decoration: none;
 	font-weight: 500;
