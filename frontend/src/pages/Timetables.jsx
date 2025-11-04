@@ -328,7 +328,7 @@ export default function Timetables() {
                                   className="btn btn-sm btn-outline-danger"
                                   onClick={() => removeSlot(absoluteIndex)}
                                   title="Remove"
-                                ></button>
+                                >Delete</button>
                               </td>
                             </tr>
                           );

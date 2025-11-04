@@ -303,6 +303,12 @@ npm run preview    # Preview build
 - Check API URL in `src/services/api.js`
 - Check CORS configuration
 
+**Site not loading after long inactivity?**
+- ⚠️ **Do a hard refresh** to clear cached assets:
+  - **Windows/Linux:** `Ctrl + Shift + R` or `Ctrl + F5`
+  - **Mac:** `Cmd + Shift + R`
+- This ensures you get the latest version after server updates or deployments
+
 **Email not sending?**
 - Use Gmail app password (not regular password)
 - Enable 2FA on Gmail account

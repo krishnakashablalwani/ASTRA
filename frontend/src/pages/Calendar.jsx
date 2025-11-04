@@ -33,10 +33,11 @@ export default function Calendar() {
   const fetchExams = async () => {
     try {
       const response = await api.get('/exams');
+      console.log('Fetched exams:', response.data);
       setExams(response.data);
     } catch (error) {
       // Exams endpoint may not exist, silently fail
-      console.log('Exams feature not available');
+      console.log('Exams feature not available', error);
       setExams([]);
     }
   };
@@ -84,7 +85,11 @@ export default function Calendar() {
     });
     const dayExams = exams.filter(e => {
       const d = new Date(e.examDate || e.date);
-      return !isNaN(d.getTime()) && d.toDateString() === dateStr;
+      const isValid = !isNaN(d.getTime()) && d.toDateString() === dateStr;
+      if (isValid) {
+        console.log('Exam matched for date:', dateStr, 'exam:', e);
+      }
+      return isValid;
     });
     return [...dayEvents.map(e => ({ ...e, type: 'event' })), ...dayExams.map(e => ({ ...e, type: 'exam' }))];
   };

@@ -248,13 +248,14 @@ export default function Feedback() {
                         <button
                           key={rating}
                           type="button"
-                          className="btn btn-outline-warning"
+                          className={`btn ${newFeedback.rating >= rating ? 'btn-warning' : 'btn-outline-warning'}`}
                           style={{ 
                             fontSize: '1.5rem',
                             padding: '0.5rem 1rem'
                           }}
                           onClick={() => setNewFeedback({ ...newFeedback, rating })}
                         >
+                          <i className={`bi bi-star-fill ${newFeedback.rating >= rating ? 'text-dark' : ''}`}></i>
                         </button>
                       ))}
                     </div>
@@ -276,6 +277,7 @@ export default function Feedback() {
                                     className={`btn btn-sm ${newFeedback.facilities[key] >= v ? 'btn-warning' : 'btn-outline-warning'}`}
                                     onClick={() => setNewFeedback({ ...newFeedback, facilities: { ...newFeedback.facilities, [key]: v } })}
                                   >
+                                    <i className={`bi bi-star-fill ${newFeedback.facilities[key] >= v ? 'text-dark' : ''}`}></i>
                                   </button>
                                 ))}
                               </div>
